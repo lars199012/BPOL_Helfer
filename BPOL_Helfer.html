@@ -1,0 +1,226 @@
+<!DOCTYPE html> 
+<html lang="de"> 
+<head> 
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>BPOL-Helfer</title> 
+
+<link rel="stylesheet" href="data/styles/main.css">
+
+<script src="data/modules/strafanzeigen.js"></script>
+<script src="data/modules/fahndungen.js"></script>
+<script src="data/modules/ordnungswidrigkeiten.js"></script>
+<script src="data/modules/einstellungen.js"></script>
+<script src="data/modules/Vorlagen.js"></script>
+<script src="data/modules/schengenhandbuch.js"></script>
+
+<script src="data/modules/core.js"></script>
+  
+</head> 
+<body class="p-4 md:p-8"> 
+    <svg style="display: none;"> 
+        <defs> 
+            <symbol id="icon-shield" viewBox="0 0 24 24"> 
+                <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-3zm4.5 10.25L12 13.4l-4.5 2.85 1.2-5.3-4.2-3.6 5.4-0.25L12 2l1.9 5L19.5 7.4l-4.2 3.6 1.2 5.25z"/> 
+            </symbol> 
+            <symbol id="icon-mail" viewBox="0 0 24 24"> 
+                <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" /> 
+            </symbol> 
+            <symbol id="icon-aufenthg" viewBox="0 0 128 128"> 
+                <g><path d="M28.6,51.3v-8.6h1.8c3.8,0,5-2,5-5.3V14.6c0-2.8-2.4-4.7-5.5-4.7H8v32l16.1,12.7C26.3,56.1,28.6,54.2,28.6,51.3z M30.1,13.3c0.9,0,2.1,0.6,2.1,1.8v22.6c0,1.1-0.8,1.8-1.8,1.8h-1.8V26.4c0-1.4-0.3-2.9-2.3-4.4l-12.3-8.7H30.1z"/><path d="M97.4,47.5H60.2c-4.8,0-8,2.1-10.9,5.6l-12,16l-17-13.5c-7.9-5.8-16.8,5.5-9.1,11.4l22.3,17.6c4.8,3.4,8.6,1.9,10.7-0.2 l16.4-21.9v33.6L97.4,47.5z"/><polygon points="98.9,14.9 98.9,3.7 58.7,3.7 66.4,14.9 	"/><path d="M60.2,26.6h7.6c0,9.1,7.1,15.4,15.4,15.4c8,0,15.7-6.4,15.7-15.7v-7.9H66.7L60.2,26.6z"/><path d="M106.6,47.7L69.2,97.9h32.5v8h-41v17.3h56.3V59.2C117.1,49.8,110.9,47.7,106.6,47.7z"/></g> 
+            </symbol> 
+            <symbol id="icon-waffg" viewBox="0 0 512 512"> 
+                <path d="M311.96 258.5L105.55 484l-30-28.31L288.92 236.7zM139.77 417.7a7.41 7.41 0 1 0 .3 10.47 7.41 7.41 0 0 0-.3-10.47zm23.74-25.14a7.41 7.41 0 1 0 .3 10.47 7.41 7.41 0 0 0-.29-10.44zm23.76-25.11a7.41 7.41 0 1 0 .3 10.47 7.41 7.41 0 0 0-.3-10.47zm23.74-25.15a7.41 7.41 0 1 0 .3 10.47 7.41 7.41 0 0 0-.3-10.47zm23.76-25.14a7.41 7.41 0 1 0 .3 10.47 7.41 7.41 0 0 0-.3-10.47zm23.74-25.14a7.41 7.41 0 1 0 .3 10.47 7.41 7.41 0 0 0-.31-10.47zm23.74-25.14a7.41 7.41 0 1 0 .3 10.47 7.41 7.41 0 0 0-.3-10.47zM52.67 433.13l-28.26-30 225.85-206 21.71 23.02zm36.9-63.05a7.41 7.41 0 1 0-.32 10.47 7.41 7.41 0 0 0 .33-10.47zm25.2-23.7a7.41 7.41 0 1 0-.32 10.47 7.41 7.41 0 0 0 .32-10.47zm25.17-23.68a7.41 7.41 0 1 0-.32 10.47 7.41 7.41 0 0 0 .32-10.47zm25.18-23.7a7.41 7.41 0 1 0-.32 10.47 7.41 7.41 0 0 0 .32-10.5zm25.18-23.7a7.41 7.41 0 1 0-.32 10.47 7.41 7.41 0 0 0 .32-10.5zm25.18-23.7a7.41 7.41 0 1 0-.32 10.47 7.41 7.41 0 0 0 .32-10.51zm25.18-23.7a7.41 7.41 0 1 0-.32 10.47 7.41 7.41 0 0 0 .32-10.51zm63.89 1.63c12.87-10.8 25.09-20.92 37-30.79C425.04 129.57 475.68 87.63 487.59 28c-8.36 6.7-63.45 50.38-92.82 58.58l-114 119.47z"/> 
+            </symbol> 
+            <symbol id="icon-trash" viewBox="0 0 24 24"> 
+                <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" /> 
+            </symbol> 
+            <symbol id="icon-generate" viewBox="0 0 24 24"> 
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" /> 
+            </symbol> 
+            <symbol id="icon-copy" viewBox="0 0 24 24"> 
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5 .124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.25-7.5-8.25-4.257 0-7.5 3.79-7.5 8.25v3.375c0 .621.504 1.125 1.125 1.125h3.375" /> 
+            </symbol> 
+            <symbol id="icon-import" viewBox="0 0 24 24"> 
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 8.25H7.5a2.25 2.25 0 00-2.25 2.25v9a2.25 2.25 0 002.25 2.25h9A2.25 2.25 0 0018.75 19.5v-9a2.25 2.25 0 00-2.25-2.25H15M9 12l3 3m0 0l3-3m-3 3V2.25" /> 
+            </symbol> 
+            <symbol id="icon-export" viewBox="0 0 24 24"> 
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 8.25H7.5a2.25 2.25 0 00-2.25 2.25v9a2.25 2.25 0 002.25 2.25h9A2.25 2.25 0 0018.75 19.5v-9a2.25 2.25 0 00-2.25-2.25H15m0-3l-3-3m0 0l-3 3m3-3V15" /> 
+            </symbol> 
+            <symbol id="icon-checkmark" viewBox="0 0 24 24"> 
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /> 
+            </symbol> 
+            <symbol id="icon-cross" viewBox="0 0 24 24"> 
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /> 
+            </symbol> 
+<symbol id="icon-custom-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <title>Kopieren</title>
+            <rect x="3" y="7" width="12" height="14" rx="2.5" />
+            <rect x="9" y="3" width="12" height="14" rx="2.5" />
+            <path d="M12 9h6M12 12h6M12 15h4" />
+        </symbol>
+        </defs> 
+    </svg> 
+
+    <div class="max-w-7xl mx-auto relative"> 
+        <div id="versionDisplay" class="absolute top-2 right-4 text-xs text-gray-400 font-mono"></div> 
+        <div class="absolute top-8 right-4 flex flex-col items-end gap-2 z-50"> 
+            <a id="tab-fehlermelden" class="btn btn-secondary text-xs px-2 py-1 rounded-md cursor-pointer"> 
+                <svg class="btn-icon" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><use xlink:href="#icon-mail"></use></svg> 
+                <span>Fehler melden</span> 
+            </a> 
+            <button id="developerModeToggle" class="btn btn-secondary text-xs px-2 py-1 rounded-md"> 
+                Entwicklermodus: Aus 
+            </button> 
+            <input type="checkbox" id="developerModeCheckbox" class="hidden"> 
+        </div> 
+
+        <header class="bpol-header p-4 rounded-t-lg shadow-md flex items-center space-x-4"> 
+            <svg class="w-12 h-12" fill="white"><use xlink:href="#icon-shield"></use></svg> 
+            <div> 
+                <h1 class="text-2xl font-bold">BPOL-Helfer</h1> 
+                <p class="text-sm opacity-80">Sachverhaltersteller & Arbeitshilfe</p> 
+            </div> 
+        </header> 
+
+        <div class="bg-white shadow-md rounded-b-lg mb-8"> 
+            <nav class="flex space-x-1 md:space-x-4 p-4 border-b border-gray-200 overflow-x-auto"> 
+                <button id="tab-strafanzeigen" class="tab-button active px-4 py-2 text-lg flex-shrink-0">Strafanzeigen</button> 
+                <button id="tab-ordnungswidrigkeiten" class="tab-button px-4 py-2 text-lg flex-shrink-0">Ordnungswidrigkeiten</button> 
+                <button id="tab-fahndungen" class="tab-button px-4 py-2 text-lg flex-shrink-0">Fahndungen</button> 
+		<button id="tab-berichte" class="tab-button px-4 py-2 text-lg flex-shrink-0">Berichte / Meldungen</button>
+                <button id="tab-einstellungen" class="tab-button px-4 py-2 text-lg flex-shrink-0">Einstellungen & Vorlagen</button> 
+                <button id="tab-schengenhandbuch" class="tab-button px-4 py-2 text-lg flex-shrink-0">Schengenhandbuch</button>
+            </nav> 
+        </div> 
+        
+        <main> 
+            <div id="content-strafanzeigen">  </div> 
+            
+            <div id="content-fahndungen" class="hidden"> </div>
+
+            <div id="content-ordnungswidrigkeiten" class="hidden">  </div> 
+
+<div id="content-berichte" class="hidden">
+        <div class="bpol-card p-6">
+            <div class="bg-blue-50 border-l-4 border-blue-400 text-blue-700 p-4 rounded-md" role="alert">
+                <p class="font-bold">Hinweis</p>
+                <p>Hier werden in Zukunft Berichte und Meldungen (z.B. Reisen in den Herkunftstaat oder Kostenvorgänge für NZGs) generiert werden können.</p>
+            </div>
+        </div>
+    </div>
+
+
+<div id="content-schengenhandbuch" class="hidden">
+    <div class="space-y-6">
+        <!-- Auswahl zwischen Schengen- und Nicht-Schengenländern -->
+        <div id="schengen-choice-container">
+            <!-- Inhalte werden per JavaScript gerendert -->
+        </div>
+ </div>
+</div>
+
+            <div id="content-einstellungen" class="hidden">  </div> 
+
+ <div id="content-hilfestellungen" class="hidden">
+    <div class="bpol-card p-6">
+        <div class="bg-blue-50 border-l-4 border-blue-400 text-blue-700 p-4 rounded-md" role="alert">
+            <p class="font-bold">Hinweis</p>
+            <p>Hier wird in Zukunft eine Hilfeseite für Vorgänge eingerichtet.</p>
+        </div>
+    </div>
+</div>          
+
+
+        </main> 
+    </div> 
+
+    <div id="outputModal" class="modal-overlay hidden"> 
+        <div class="modal-content"> 
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">Generierter Ausgabetext</h2> 
+            <textarea id="finalOutput" readonly class="form-element form-textarea h-96 mb-4"></textarea> 
+            <div class="flex justify-end space-x-4"> 
+               <button id="copyOutputBtn" class="btn btn-primary px-4 py-2">
+    <svg class="btn-icon"><use xlink:href="#icon-custom-copy"></use></svg>
+    <span>Text kopieren</span>
+</button>
+                <button id="closeModalBtn" class="btn btn-secondary px-4 py-2">Schließen</button> 
+            </div> 
+        </div> 
+    </div> 
+    
+    <div id="errorModal" class="modal-overlay hidden"> 
+        <div class="modal-content max-w-md"> 
+            <h2 class="text-2xl font-bold text-red-600 mb-4">Fehler</h2> 
+            <p id="errorModalText" class="text-gray-700 mb-6"></p> 
+            <div class="flex justify-end"><button id="closeErrorModalBtn" class="btn btn-primary px-4 py-2">Okay</button></div> 
+        </div> 
+    </div> 
+
+    <div id="infoModal" class="modal-overlay hidden"> 
+        <div class="modal-content max-w-md"> 
+            <h2 id="infoModalTitle" class="text-2xl font-bold mb-4" style="color: var(--bpol-success);">Erfolg</h2> 
+            <p id="infoModalText" class="text-gray-700 mb-6"></p> 
+            <div class="flex justify-end"><button id="closeInfoModalBtn" class="btn btn-primary px-4 py-2">OK</button></div> 
+        </div> 
+    </div> 
+
+    <div id="confirmModal" class="modal-overlay hidden"> 
+        <div class="modal-content max-w-md"> 
+            <h2 id="confirmModalTitle" class="text-2xl font-bold text-gray-800 mb-4">Bestätigung</h2> 
+            <p id="confirmModalText" class="text-gray-700 mb-6"></p> 
+            <div class="flex justify-end space-x-4"> 
+                <button id="confirmModalNoBtn" class="btn btn-secondary px-4 py-2">Nein</button> 
+                <button id="confirmModalYesBtn" class="btn btn-primary px-4 py-2">Ja</button> 
+            </div> 
+        </div> 
+    </div> 
+
+    <div id="anleitungModal" class="modal-overlay hidden"> 
+        <div class="modal-content"> 
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">Anleitung: Datenimport aus Aufenthaltsrechner</h2> 
+            <div class="space-y-4 text-gray-700"> 
+                <div class="p-4 bg-gray-100 rounded-lg"> 
+                    <p class="font-semibold">1. PDF erstellen</p> 
+                    <p class="text-sm">Erstelle eine PDF über den Button Drucken... Wähle als Drucker <span class="text-green">"als PDF Speichern"</span> oder <span class="text-green">"Microsoft Print to PDF"</span> aus und <span class="text-red">nicht "PDF-Xchange Standart"</span>.</p> 
+                    <div class="example-buttons-container"> 
+                        <div class="example-button"><span>als PDF Speichern</span><svg style="color: var(--bpol-success);" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><use xlink:href="#icon-checkmark"></use></svg></div> 
+                        <div class="example-button"><span>Microsoft Print to PDF</span><svg style="color: var(--bpol-success);" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><use xlink:href="#icon-checkmark"></use></svg></div> 
+                        <div class="example-button"><span>PDF-Xchange Standart</span><svg style="color: var(--bpol-danger);" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><use xlink:href="#icon-cross"></use></svg></div> 
+                    </div> 
+                </div> 
+                <div class="p-4 bg-gray-100 rounded-lg"><p class="font-semibold">2. Textauswahl-Werkzeug aktivieren</p><p class="text-sm">Öffne die PDF (mit dem Acrobat Reader) und klicke oben links im Reiter "Start" auf den darunterliegenden Button "Textauswahl".</p></div> 
+                <div class="p-4 bg-gray-100 rounded-lg"><p class="font-semibold">3. Text markieren</p><p class="text-sm">Markiere die komplette Berechnung der Aufenthaltsdauer (die komplette Seite).</p></div> 
+                <div class="p-4 bg-gray-100 rounded-lg"><p class="font-semibold">4. Text kopieren</p><p class="text-sm">Kopiere den Text mit dem Tastendruck <code class="bg-gray-200 px-1 rounded">STRG + C</code>, oder mit einem Rechtsklick + "Kopieren".</p></div> 
+                <div class="p-4 bg-gray-100 rounded-lg"><p class="font-semibold">5. Text einfügen</p><p class="text-sm">Füge den Text in das Textfeld ein, welches sich beim Import öffnet.</p></div> 
+            </div> 
+            <div class="flex justify-end mt-6"><button id="closeAnleitungModalBtn" class="btn btn-primary px-4 py-2">Schließen</button></div> 
+        </div> 
+    </div> 
+
+<div id="exportTextModal" class="modal-overlay hidden">
+    <div class="modal-content">
+        <h2 class="text-2xl font-bold text-gray-800 mb-4">Export als Text</h2>
+        <p class="text-sm text-gray-600 mb-4">Dieser Text kann kopiert und in einer `Vorlagen.js`-Datei gespeichert werden.</p>
+        <textarea id="exportAsTextOutput" readonly class="form-element form-textarea h-96 mb-4"></textarea>
+        <div class="flex justify-end space-x-4">
+           <button id="copyExportTextBtn" class="btn btn-primary px-4 py-2">
+    <svg class="btn-icon"><use xlink:href="#icon-custom-copy"></use></svg>
+    <span>Text kopieren</span>
+</button>
+            <button id="closeExportTextModalBtn" class="btn btn-secondary px-4 py-2">Schließen</button>
+        </div>
+    </div>
+</div>
+
+    <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mt-8 rounded-md shadow-md max-w-7xl mx-auto" role="alert"> 
+        <p class="font-bold">Achtung!</p> 
+        <p>Dies ist eine Testversion. Bitte mit Vorsicht gebrauchen und jeden Text eigenverantwortlich auf seine Richtigkeit prüfen.</p> 
+    </div> 
+
+
+</body> 
+</html>
+
+
+
