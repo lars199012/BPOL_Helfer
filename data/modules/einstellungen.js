@@ -1034,4 +1034,4 @@ const EinstellungenModul = {
     }
 };
 
-window.EinstellungenModul = Einstellungen;
+window.EinstellungenModul = EinstellungenModul;
